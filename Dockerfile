@@ -2,14 +2,17 @@ FROM python:3
 
 WORKDIR /data
 
+# Install necessary system packages and python3-distutils
 RUN apt-get update && apt-get install -y python3-distutils
 
 # Install Django directly
 RUN pip install --no-cache-dir django==3.2
 
+# Copy the application code
 COPY . .
 
-RUN python manage.py migrate
+# Ensure Django is installed and run migrations
+RUN python -m pip install --no-cache-dir django==3.2 && python manage.py migrate
 
 EXPOSE 8000
 
