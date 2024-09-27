@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y python3-distutils python3-pip
 
 COPY . .
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir django==3.2
 
 RUN python manage.py migrate
 
