@@ -1,14 +1,17 @@
+# Use the appropriate Python base image
+FROM python:3.12-slim
 
-FROM python:3
+# Install setuptools to get distutils
+RUN pip install --upgrade pip setuptools
 
-WORKDIR /data
-
+# Install Django and other dependencies
 RUN pip install django==3.2
 
+# Copy project files into the container
 COPY . .
 
+# Run migrations
 RUN python manage.py migrate
 
+# Expose the application's port
 EXPOSE 8000
-
-CMD ["python","manage.py","runserver","0.0.0.0:8000"]
